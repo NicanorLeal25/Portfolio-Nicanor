@@ -145,6 +145,7 @@ span {
     text-align: justify;
 }
 
+.skills h2,
 .services h2, 
 .portfolio h2, 
 .contact h2 {
@@ -300,6 +301,53 @@ form .input-box input, form textarea {
 
 form textarea {
     resize: none;
+}
+
+.skills-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.skills-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: rem;
+    margin: 1rem;
+}
+
+.skills-container .skills-box {
+    padding: 2rem 1rem 2.5rem;
+    border-radius: 1.2rem;
+    text-align: center;
+    border: solid 0.15rem var(--bg-color-01);
+    background-color: var(--bg-color-02);
+    transition: 0.5s ease;
+}
+
+.skills-container .skills-box:hover {
+    
+    transform: scale(1.04);
+}
+
+.skills-box i {
+    font-size: 4.3rem;
+    color: var(--main-color);
+}
+
+.skills-box h3 {
+    font-size: 1.5rem;
+}
+
+.skills-box p {
+    margin: 0.5rem;
+    letter-spacing: 0.1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-line-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 footer {
