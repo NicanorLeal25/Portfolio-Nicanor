@@ -1,298 +1,669 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio - Nicanor Leal</title>
-    <!-- box icons -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfólio Futurista - Nicanor Leal</title>
+    <meta name="description" content="Portfólio de Nicanor Leal — Desenvolvedor Front-end e UX Designer." />
+
+    <!-- Fonts & Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <!-- css customizado -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/nicanor.ico" />
 
-    <link rel="shortcut icon" href="/img/nicanor.ico" type="image/x-icon" />
+    <style>
+        :root {
+            --bg-900: #070707;
+            --panel: rgba(59, 55, 55, 0.55);
+            --glass: rgba(255, 255, 255, 0.03);
+            --accent: #dd0808;
+            --muted: #9b9b9b;
+            --text: #e8e8e8;
+            --glass-2: rgba(255, 255, 255, 0.02);
+            --max-width: 1200px;
+            --radius: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-900);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        canvas#particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 24px;
+            backdrop-filter: blur(6px);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            border-bottom: 1px solid rgba(255, 0, 0, 0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        .logo img {
+            height: 42px;
+            width: 42px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid rgba(221, 8, 8, 0.5);
+        }
+
+        .logo span {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.6px;
+            color: var(--accent)
+        }
+
+        nav.primary {
+            display: flex;
+            gap: 14px;
+            align-items: center
+        }
+
+        nav.primary a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            transition: all .22s
+        }
+
+        nav.primary a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 12px var(--accent);
+            transform: translateY(-2px)
+        }
+
+        .cta-download {
+            padding: 8px 14px;
+            background: linear-gradient(90deg, var(--accent), #ff4b4b);
+            border-radius: 999px;
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 0 12px var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.6rem;
+            color: var(--accent);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            right: 0;
+            left: 0;
+            background: var(--bg-900);
+            flex-direction: column;
+            gap: 12px;
+            padding: 20px;
+            z-index: 25;
+            text-align: center;
+        }
+
+        .mobile-menu a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.15);
+            transition: all .25s;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 8px var(--accent);
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 10;
+            max-width: var(--max-width);
+            margin: 120px auto 80px;
+            padding: 28px
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 32px;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(255, 0, 0, 0.01), transparent);
+            border-radius: var(--radius);
+            padding: 40px;
+            border: 1px solid rgba(221, 8, 8, 0.1);
+            box-shadow: 0 0 40px rgba(221, 8, 8, 0.6);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-left h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.4rem;
+            margin-bottom: 6px;
+            color: var(--text)
+        }
+
+        .hero-left h1 .accent {
+            color: var(--accent);
+            text-shadow: 0 0 16px var(--accent)
+        }
+
+        .hero-left p {
+            color: var(--muted);
+            margin: 14px 0 18px;
+            font-size: 1rem;
+            max-width: 68%
+        }
+
+        .badges {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .badge {
+            background: var(--glass);
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(221, 8, 8, 0.3);
+            font-weight: 600;
+            color: var(--accent);
+            text-shadow: 0 0 6px rgba(221, 8, 8, 0.7);
+            transition: transform .3s;
+        }
+
+        .badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 14px var(--accent);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .3s
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent), #ff4b4b);
+            color: #fff;
+            box-shadow: 0 0 16px var(--accent);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 28px var(--accent), 0 0 48px rgba(221, 8, 8, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(221, 8, 8, 0.4);
+            color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: rgba(221, 8, 8, 0.1);
+            text-shadow: 0 0 8px var(--accent);
+        }
+
+        .profile-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            padding: 18px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(255, 0, 0, 0.03), transparent);
+            border: 1px solid rgba(221, 8, 8, 0.15);
+            box-shadow: 0 0 28px rgba(221, 8, 8, 0.5);
+            transition: transform .3s;
+        }
+
+        .profile-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--accent);
+        }
+
+        .profile-card img {
+            width: 200px;
+            height: 200px;
+            border-radius: 18px;
+            object-fit: cover;
+            border: 6px solid rgba(221, 8, 8, 0.6);
+            box-shadow: 0 0 36px rgba(221, 8, 8, 0.7);
+        }
+
+        section.page {
+            margin-top: 36px;
+            padding: 28px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(255, 0, 0, 0.01), transparent);
+            border: 1px solid rgba(221, 8, 8, 0.05);
+        }
+
+        section.page h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+            color: var(--accent);
+            text-shadow: 0 0 12px var(--accent);
+        }
+
+        .grid {
+            display: grid;
+            gap: 16px
+        }
+
+        .services-grid {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))
+        }
+
+        .service {
+            padding: 18px;
+            border-radius: 10px;
+            background: var(--panel);
+            border: 1px solid rgba(221, 8, 8, 0.05);
+            backdrop-filter: blur(4px);
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        .service:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 28px var(--accent);
+        }
+
+        .service i {
+            font-size: 28px;
+            color: var(--accent);
+            margin-bottom: 8px
+        }
+
+        .service h3 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            color: var(--accent);
+            text-shadow: 0 0 8px var(--accent);
+        }
+
+        .service p {
+            color: var(--muted);
+            font-size: 0.95rem
+        }
+
+        .projects {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))
+        }
+
+        .project {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(221, 8, 8, 0.1);
+            transition: all .4s;
+        }
+
+        .project img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            transition: transform .6s ease, box-shadow .4s ease;
+        }
+
+        .project:hover img {
+            transform: scale(1.06);
+            box-shadow: 0 0 28px var(--accent);
+        }
+
+        .project-info {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 12px;
+            background: linear-gradient(180deg, transparent, rgba(221, 8, 8, 0.8));
+            color: #fff;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .skills {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .skill {
+            min-width: 120px;
+            padding: 10px;
+            border-radius: 10px;
+            background: var(--glass-2);
+            border: 1px solid rgba(221, 8, 8, 0.05);
+            text-align: center;
+            box-shadow: 0 0 12px rgba(221, 8, 8, 0.2);
+        }
+
+        .skill img {
+            width: 44px;
+            height: 44px
+        }
+
+        form .row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            background: transparent;
+            border: 1px solid rgba(221, 8, 8, 0.25);
+            color: var(--text);
+            box-shadow: 0 0 12px rgba(221, 8, 8, 0.15);
+        }
+
+        form textarea {
+            min-height: 120px
+        }
+
+        form button {
+            margin-top: 12px
+        }
+
+        footer {
+            margin-top: 28px;
+            padding: 18px;
+            text-align: center;
+            color: var(--muted)
+        }
+
+        @media(max-width:980px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-left {
+                order: 2
+            }
+
+            .profile-card {
+                order: 1;
+                margin-bottom: 20px;
+            }
+
+            .hero-left p {
+                max-width: 100%
+            }
+        }
+
+        @media(max-width:520px) {
+            nav.primary {
+                display: none
+            }
+
+            .hamburger {
+                display: flex;
+                align-items: center
+            }
+
+            header {
+                padding: 12px
+            }
+        }
+    </style>
 </head>
-<body>
-    <!-- cabeçalho -->
-    <header>
-        <a href="/img/logo-nicanor.png" class="logo"><img src="/img/logo-nicanor.png" alt=""></a>
-        
-        <div class="nav">
-            <a href="#home">Home</a>
-            <a href="#services">Serviços</a>
-            <a href="#portfolio">Projetos</a>
-            <a href="#contact">Contato</a>
-            <a href="#about">Sobre</a>
-        </div>
-        <div class="nav-responsive">
-            <a href="#home">Home</a>
-            <a href="#services">Serviços</a>
-            <a href="#portfolio">Projetos</a>
-            <a href="#contact">Contato</a>
-            <a href="#about">Sobre</a>
-        </div>
 
-        
-        <div class="menu-hamburguer">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
+<body>
+    <canvas id="particles"></canvas>
+
+    <header>
+        <div class="logo">
+            <img src="img/logo-nicanor.png" alt="Logo Nicanor">
+            <span>Nicanor <strong>Leal</strong></span>
+        </div>
+        <nav class="primary">
+            <a href="#home">Home</a>
+            <a href="#services">Serviços</a>
+            <a href="#portfolio">Projetos</a>
+            <a href="#about">Sobre</a>
+            <a href="#contact" class="cta-download">Contato</a>
+        </nav>
+        <div class="hamburger" aria-label="Menu mobile" aria-expanded="false" aria-controls="mobile-menu">
+            <i class='bx bx-menu'></i>
         </div>
     </header>
 
-    <!-- home section -->
-    <section class="home" id="home">
-        <div class="home-content">
-            <h3>Olá, eu sou</h3>
-            <h1>Nicanor Leal</h1>
-            <h3>Desenvolvedor<span> Front-end </span>e<span> UX Designer</span></h3>
-            <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus vel possimus, eligendi harum corrupti recusandae necessitatibus facilis molestiae vero similique quam expedita voluptate quidem ullam minima laudantium omnis molestias consectetur!
-            </p>
-            
-            <div class="social-media">
-                <a href="#"><i class='bx bxl-facebook'></i></a>
-                <a href="#"><i class='bx bxl-instagram'></i></a>
-                <a href="#"><i class='bx bxl-linkedin' ></i></a>
-                <a href="#"><i class='bx bxl-github' ></i></a>
-            </div>
+    <nav id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <a href="#home">Home</a>
+        <a href="#services">Serviços</a>
+        <a href="#portfolio">Projetos</a>
+        <a href="#about">Sobre</a>
+        <a href="#contact">Contato</a>
+    </nav>
 
-            <div>
-                <a href="#" class="btn">Download CV</a>
-            </div>
-        </div>   
-
-       <div class="home-img">
-        <img src="img/nicanor.png" alt="Foto de Perfil">        
-       </div>
-    </section>
-    <!-- /home section -->
-    
-    <!-- service section-->
-    <section class="services" id="services">
-        <h2>Meus <span>Serviços</span></h2>
-
-        <div class="services-container">
-            <div class="services-box">
-                <i class='bx bx-code-alt'></i>
-                <h3>Desenvolvedor Front-end</h3>
-                
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea quibusdam totam provident quo dolores, commodi illum impedit fugiat minus numquam dolorem natus, quia inventore facilis sed odit ad neque suscipit et molestiae. Dolores quos quia sapiente, ipsa officia aperiam tenetur!
+    <main class="wrap" id="home">
+        <section class="hero">
+            <div class="hero-left">
+                <h1>Olá, eu sou <span class="accent">Nicanor Leal</span></h1>
+                <p>Desenvolvedor Front‑end e UX Designer. Crio interfaces limpas, performáticas e focadas no usuário.
                 </p>
-
-                <a href="#" class="btn">Consulte mais</a>
+                <div class="badges">
+                    <div class="badge">Front-end</div>
+                    <div class="badge">UX/UI</div>
+                    <div class="badge">React • JS</div>
+                </div>
+                <div style="margin-top:20px" class="hero-actions">
+                    <a class="btn btn-primary" href="#portfolio"><i class='bx bx-folder-open'></i> Projetos</a>
+                    <a class="btn btn-outline" href="#contact"><i class='bx bx-envelope'></i> Contato</a>
+                </div>
             </div>
 
-            <div class="services-box">
-                <i class='bx bx-code-curly' ></i>
-                <h3>Desenvolvedor Back-end</h3>
-                
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea quibusdam totam provident quo dolores, commodi illum impedit fugiat minus numquam dolorem natus, quia inventore facilis sed odit ad neque suscipit et molestiae. Dolores quos quia sapiente, ipsa officia aperiam tenetur!
-                </p>
+            <aside class="profile-card">
+                <img src="img/nicanor.png" alt="Foto de Nicanor Leal">
+                <h4>Nicanor Leal</h4>
+                <small class="muted">Desenvolvedor Front-end • UX</small>
+                <div style="margin-top:8px;display:flex;gap:8px">
+                    <a class="btn btn-outline" href="#contact"><i class='bx bx-phone'></i> +55 (12) 99674-6405</a>
+                </div>
+            </aside>
+        </section>
 
-                <a href="#" class="btn">Consulte mais</a>
+        <section class="page" id="services">
+            <h2>Serviços</h2>
+            <div class="grid services-grid">
+                <article class="service"><i class='bx bx-code-alt'></i>
+                    <h3>Desenvolvedor Front-end</h3>
+                    <p>HTML, CSS, JS e React para interfaces rápidas e responsivas.</p>
+                </article>
+                <article class="service"><i class='bx bx-paint'></i>
+                    <h3>Design & UX</h3>
+                    <p>Prototipagem, testes de usabilidade e design centrado no usuário.</p>
+                </article>
+                <article class="service"><i class='bx bx-cog'></i>
+                    <h3>Consultoria Tech</h3>
+                    <p>Orientação em stacks, performance e soluções técnicas.</p>
+                </article>
             </div>
+        </section>
 
-            <div class="services-box">
-                <i class='bx bx-paint'></i>
-                <h3>Desenvolvedor Full Stack</h3>
-
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea quibusdam totam provident quo dolores, commodi illum impedit fugiat minus numquam dolorem natus, quia inventore facilis sed odit ad neque suscipit et molestiae. Dolores quos quia sapiente, ipsa officia aperiam tenetur!
-                </p>
-
-                <a href="#" class="btn">Consulte mais</a>
+        <section class="page" id="portfolio">
+            <h2>Projetos</h2>
+            <div class="grid projects">
+                <div class="project"><img src="img/project1.jpg" alt="Projeto 1">
+                    <div class="project-info">
+                        <h4>Projeto 1</h4>
+                    </div>
+                </div>
+                <div class="project"><img src="img/project2.jpg" alt="Projeto 2">
+                    <div class="project-info">
+                        <h4>Projeto 2</h4>
+                    </div>
+                </div>
+                <div class="project"><img src="img/project3.jpg" alt="Projeto 3">
+                    <div class="project-info">
+                        <h4>Projeto 3</h4>
+                    </div>
+                </div>
             </div>
+        </section>
 
-        </div>
-        
-        
-    </section>
-    <!-- /service section -->
-    
-    <!-- portfolio section -->
-    <section class="portfolio" id="portfolio">
-    <H2>Meus <Span>Projetos</Span></H2>
-
-    <div class="portfolio-container">
-        <div class="portfolio-box">
-            <img src="img/01.jpg" alt="projeto 1">
-            <div class="portfolio-layer">
-                <h4>Desenvolvimento JavaScript</h4>
-
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat quo nemo praesentium commodi eos quia ratione recusandae facere! Excepturi possimus non laudantium minima nobis in iste soluta distinctio perferendis provident.
-                </p>
-
-                <a href=""><i class='bx bx-link-external' ></i></a>
+        <section class="page" id="about">
+            <h2>Sobre</h2>
+            <p>Sou apaixonado por tecnologia e design. Crio soluções digitais com foco em estética e experiência do
+                usuário.</p>
+            <div class="skills">
+                <div class="skill"><img src="img/html.png" alt="HTML">
+                    <div>HTML5</div>
+                </div>
+                <div class="skill"><img src="img/css.png" alt="CSS">
+                    <div>CSS3</div>
+                </div>
+                <div class="skill"><img src="img/js.png" alt="JS">
+                    <div>JavaScript</div>
+                </div>
+                <div class="skill"><img src="img/react.png" alt="React">
+                    <div>React</div>
+                </div>
+                <div class="skill"><img src="img/ux.png" alt="UX">
+                    <div>UX/UI</div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="portfolio-box">
-            <img src="img/02.jpg" alt="projeto 2">
-            <div class="portfolio-layer">
-                <h4>Desenvolvimento React</h4>
+        <section class="page" id="contact">
+            <h2>Contato</h2>
+            <form>
+                <div class="row">
+                    <input type="text" placeholder="Nome" required>
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <textarea placeholder="Mensagem" required></textarea>
+                <button class="btn btn-primary" type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat quo nemo praesentium commodi eos quia ratione recusandae facere! Excepturi possimus non laudantium minima nobis in iste soluta distinctio perferendis provident.
-                </p>
+    <footer>&copy; 2025 Nicanor Leal. Todos os direitos reservados.</footer>
 
-                <a href=""><i class='bx bx-link-external' ></i></a>
-            </div>
-        </div>
+    <script>
+        // Menu Mobile
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        hamburger.addEventListener('click', () => {
+            const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+            hamburger.setAttribute('aria-expanded', !expanded);
+            mobileMenu.style.display = expanded ? 'none' : 'flex';
+            mobileMenu.setAttribute('aria-hidden', expanded);
+        });
 
-        <div class="portfolio-box">
-            <img src="img/03.jpg" alt="projeto 3">
-            <div class="portfolio-layer">
-                <h4>Desenvolvimento Bootstrap</h4>
+        // PARTICLES COM LINHAS
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        let mouse = { x: null, y: null };
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initParticles(); });
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat quo nemo praesentium commodi eos quia ratione recusandae facere! Excepturi possimus non laudantium minima nobis in iste soluta distinctio perferendis provident.
-                </p>
+        class Particle {
+            constructor(x, y, size, speedX, speedY) { this.x = x; this.y = y; this.size = size; this.speedX = speedX; this.speedY = speedY; }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+                if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+            }
+            draw() { ctx.fillStyle = 'rgba(221,8,8,0.7)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        }
 
-                <a href=""><i class='bx bx-link-external' ></i></a>
-            </div>
-        </div>
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < 80; i++) {
+                let size = Math.random() * 3 + 1;
+                let x = Math.random() * canvas.width;
+                let y = Math.random() * canvas.height;
+                let speedX = (Math.random() - 0.5) * 1.5;
+                let speedY = (Math.random() - 0.5) * 1.5;
+                particlesArray.push(new Particle(x, y, size, speedX, speedY));
+            }
+        }
 
-        <div class="portfolio-box">
-            <img src="img/04.jpg" alt="projeto 4">
-            <div class="portfolio-layer">
-                <h4>Desenvolvimento Design</h4>
+        function connectParticles() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let dx = particlesArray[a].x - particlesArray[b].x;
+                    let dy = particlesArray[a].y - particlesArray[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 120) {
+                        ctx.strokeStyle = `rgba(221,8,8,${1 - distance / 120})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat quo nemo praesentium commodi eos quia ratione recusandae facere! Excepturi possimus non laudantium minima nobis in iste soluta distinctio perferendis provident.
-                </p>
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesArray.forEach(p => { p.update(); p.draw(); });
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
 
-                <a href=""><i class='bx bx-link-external' ></i></a>
-            </div>
-        </div>
-
-        <div class="portfolio-box">
-            <img src="img/05.jpg" alt="projeto 5">
-            <div class="portfolio-layer">
-                <h4>Desenvolvimento Front</h4>
-
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat quo nemo praesentium commodi eos quia ratione recusandae facere! Excepturi possimus non laudantium minima nobis in iste soluta distinctio perferendis provident.
-                </p>
-
-                <a href=""><i class='bx bx-link-external' ></i></a>
-            </div>
-        </div>
-
-        <div class="portfolio-box">
-            <img src="img/06.jpg" alt="projeto 6">
-            <div class="portfolio-layer">
-                <h4>Desenvolvimento Back</h4>
-
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat quo nemo praesentium commodi eos quia ratione recusandae facere! Excepturi possimus non laudantium minima nobis in iste soluta distinctio perferendis provident.
-                </p>
-
-                <a href=""><i class='bx bx-link-external' ></i></a>
-            </div>
-        </div>
-    </div>
-    </section>
-    <!-- /portfolio section -->
-
-    <!-- contact section -->
-    <section class="contact" id="contact">
-        <h2>contate<span>-me</span></h2>
-
-        <form action="">
-            <div class="input-box">
-                <input type="text" placeholder="Nome Completo">
-                <input type="email" placeholder="E-mail">
-            </div>
-
-            <div class="input-box">
-                <input type="number" placeholder="Número de Telefone">
-                <input type="text" placeholder="Assunto">
-            </div>
-
-            <textarea cols="30" rows="8" placeholder="Mensagem"></textarea>
-
-            <a href="#" class="btn">Enviar Mensagem</a>
-        </form>
-    </section>
-    <!-- /contact section -->
-
-    
-
-    <!-- about section -->
-    <section class="about" id="about">
-        <div class="about-img">
-            <img src="img/nicanor.png" alt="Foto de Perfil">  
-        </div>
-
-        <div class="about-content">
-            <h3>Sobre Mim</h3>
-            <h1>Desenvolvedor <span>Front-end</span> e <span>UX Design</span></h1>
-
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere animi explicabo itaque ratione possimus repellendus suscipit enim, est perspiciatis doloremque porro vero debitis a aspernatur voluptas ipsa ducimus natus odio consectetur assumenda. Iusto exercitationem, vel architecto quia reprehenderit fuga neque labore maiores tenetur modi quis qui nam veritatis odit, similique veniam illo inventore sit voluptas ipsum aliquam fugiat! Facere impedit reprehenderit iste sed cumque exercitationem unde sunt deserunt vitae. Culpa modi neque accusamus veritatis nesciunt magni est, corrupti eveniet incidunt earum aut iure quis itaque quidem reiciendis! Recusandae, animi reiciendis.
-            </p>
-
-            <a href="" class="btn">Leia mais</a>
-        </div>
-    </section>
-    <!-- /about section -->
-
-    <section class="skills" id="skills">
-        <h2><span>Skills</span></h2>
-
-        <div class="skills-container">
-            <div class="skills-box">
-                <img class='bx bx-code-curly' width="50" height="50" src="https://img.icons8.com/ios-filled/50/dd0808/html-5--v1.png" alt="html-5--v1"/>
-                <h3>HTML</h3>
-                
-               
-
-            </div>
-
-            <div class="skills-box">
-                <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/dd0808/javascript.png" alt="javascript"/>
-                <h3>JavaScript</h3>
-                
-                
-
-            </div>
-
-            <div class="skills-box">
-                <i class='bx bx-paint'></i>
-                <h3>Desenvolvedor Full Stack</h3>
-
-                
-
-                
-            </div>
-            <div class="skills-box">
-                <i class='bx bx-paint'></i>
-                <h3>Desenvolvedor Full Stack</h3>
-
-                
-
-                
-            </div>
-            <div class="skills-box">
-                <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/dd0808/html-5--v1.png" alt="html-5--v1"/>
-                <h3>Desenvolvedor Full Stack</h3>
-
-                
-
-                
-            </div>
-
-        </div>
-        
-        
-    </section>
-
-    <footer>
-        <p>Copyright &copy; 2024 por Nicanor Leal</p>
-    </footer>
+        initParticles();
+        animateParticles();
+    </script>
 </body>
-<script src="js/script.js"></script>
+
 </html>
