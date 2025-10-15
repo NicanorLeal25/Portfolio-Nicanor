@@ -76,14 +76,6 @@
             color: var(--text);
         }
 
-        .logo img {
-            height: 42px;
-            width: 42px;
-            border-radius: 10px;
-            object-fit: cover;
-            border: 2px solid rgba(221, 8, 8, 0.5);
-        }
-
         .logo span {
             font-family: 'Orbitron', sans-serif;
             letter-spacing: 0.6px;
@@ -293,6 +285,7 @@
             margin-bottom: 14px;
             color: var(--accent);
             text-shadow: 0 0 12px var(--accent);
+            text-align: center;
         }
 
         .grid {
@@ -336,6 +329,7 @@
             font-size: 0.95rem
         }
 
+        /* Projetos */
         .projects {
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))
         }
@@ -346,6 +340,8 @@
             overflow: hidden;
             border: 1px solid rgba(221, 8, 8, 0.1);
             transition: all .4s;
+            cursor: pointer;
+            text-decoration: none;
         }
 
         .project img {
@@ -372,25 +368,31 @@
             text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
         }
 
-        .skills {
+        /* Habilidades clean */
+        .clean-skills {
             display: flex;
-            gap: 12px;
-            flex-wrap: wrap
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 20px;
+            justify-content: center;
         }
 
-        .skill {
+        .clean-skills .skill {
             min-width: 120px;
-            padding: 10px;
-            border-radius: 10px;
-            background: var(--glass-2);
-            border: 1px solid rgba(221, 8, 8, 0.05);
+            padding: 12px 16px;
+            border-radius: 14px;
+            background: rgba(221, 8, 8, 0.05);
+            border: 1px solid rgba(221, 8, 8, 0.15);
             text-align: center;
+            font-weight: 600;
+            color: var(--accent);
             box-shadow: 0 0 12px rgba(221, 8, 8, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .skill img {
-            width: 44px;
-            height: 44px
+        .clean-skills .skill:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 24px var(--accent);
         }
 
         form .row {
@@ -512,8 +514,8 @@
                 <img src="img/nicanor.png" alt="Foto de Nicanor Leal">
                 <h4>Nicanor Leal</h4>
                 <small class="muted">Desenvolvedor Full Stack • UX/UI</small>
-                <div style="margin-top:8px;display:flex;gap:8px">
-                    <a class="btn btn-outline" href="#contact"><i class='bx bx-phone'></i> +55 (12) 99674-6405</a>
+                <div style="margin-top:8px;display:flex;gap:8px; justify-content:center">
+                    <a class="btn btn-outline" href="#contact"><i class='bx bx-phone'></i> +55 (12) 99132-3855</a>
                 </div>
             </aside>
         </section>
@@ -544,44 +546,49 @@
         <section class="page" id="portfolio">
             <h2>Projetos</h2>
             <div class="grid projects">
-                <div class="project"><img src="img/project1.jpg" alt="Projeto 1">
+                <a class="project" href="https://www.seusite1.com" target="_blank" rel="noopener">
+                    <img src="img/project1.jpg" alt="Projeto 1">
                     <div class="project-info">
                         <h4>Projeto 1</h4>
                     </div>
-                </div>
-                <div class="project"><img src="img/project2.jpg" alt="Projeto 2">
+                </a>
+                <a class="project" href="https://www.seusite2.com" target="_blank" rel="noopener">
+                    <img src="img/project2.jpg" alt="Projeto 2">
                     <div class="project-info">
                         <h4>Projeto 2</h4>
                     </div>
-                </div>
-                <div class="project"><img src="img/project3.jpg" alt="Projeto 3">
+                </a>
+                <a class="project" href="https://www.seusite3.com" target="_blank" rel="noopener">
+                    <img src="img/project3.jpg" alt="Projeto 3">
                     <div class="project-info">
                         <h4>Projeto 3</h4>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
 
-        <section class="page" id="about">
+        <!-- SEÇÃO SOBRE ATUALIZADA -->
+        <section class="page" id="about" style="text-align:center;">
             <h2>Sobre</h2>
-            <p>Sou apaixonado por tecnologia e design. Crio soluções digitais com foco em estética e experiência do
-                usuário.</p>
-            <div class="skills">
-                <div class="skill"><img src="img/html.png" alt="HTML">
-                    <div>HTML5</div>
-                </div>
-                <div class="skill"><img src="img/css.png" alt="CSS">
-                    <div>CSS3</div>
-                </div>
-                <div class="skill"><img src="img/js.png" alt="JS">
-                    <div>JavaScript</div>
-                </div>
-                <div class="skill"><img src="img/react.png" alt="React">
-                    <div>React</div>
-                </div>
-                <div class="skill"><img src="img/ux.png" alt="UX">
-                    <div>UX/UI</div>
-                </div>
+            <p style="max-width:700px; margin:10px auto 20px; color:var(--muted);">
+                Sou apaixonado por tecnologia e design. Crio soluções digitais com foco em estética e experiência do
+                usuário.
+            </p>
+
+            <h3
+                style="margin-top:30px; color:var(--accent); text-shadow: 0 0 8px var(--accent); font-family:'Orbitron', sans-serif;">
+                Habilidades
+            </h3>
+            <div class="skills clean-skills">
+                <div class="skill">HTML5</div>
+                <div class="skill">CSS3</div>
+                <div class="skill">JavaScript</div>
+                <div class="skill">React</div>
+                <div class="skill">Node.js</div>
+                <div class="skill">UX/UI</div>
+                <div class="skill">MySQL</div>
+                <div class="skill">PostgreSQL</div>
+                <div class="skill">Git & GitHub</div>
             </div>
         </section>
 
